@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.summary     = "composable validations"
   s.description = "composable validations"
   s.authors     = ["Kajetan Bojko"]
-  s.email       = 'dev@shutl.co.uk'
+  s.email       = 'kai@shutl.com'
   s.files       = Dir.glob("lib/**/*") + %w(LICENSE README.md)
   s.require_paths = [".", "lib"]
 
