@@ -1,6 +1,6 @@
 # Composable Validations
 
-Gem for validation of complex JSON payloads.
+Gem for validating complex JSON payloads.
 
 ## Features
 * allows composition of generic validators into readable and reusable
@@ -13,23 +13,21 @@ Gem for validation of complex JSON payloads.
 ## Requirements
 
 * Ruby 2+
-* tolerance to parantheses as validator code has rather "lispy" functional look
-  and feel
+* A tolerance to parantheses... the validator code has rather "lispy" functional look and feel
 
 ## Install
+
 ```
 gem install composable_validations
 ```
 
 ## Quick guide
 
-Functionality of this gem is focused entirely on building validator function.
-Structure of the code that applies validator function to the payload is
-decision of the user.
+This gem allows you to build a validator - how/when you call this validation is up to you.
 
 ### Basic example
 
-We want to validate payload specifying person with name and age. E.g. `{"person" => {"name"
+Say we want to validate a payload that specifies a person with name and age. E.g. `{"person" => {"name"
 => "Bob", "age" => 28}}`
 
 ```ruby
@@ -45,7 +43,7 @@ validator = a_hash(
     key("name", non_empty_string),
     key("age", non_negative_integer))))
 
-# invalid payload
+# invalid payload with non-integer age
 payload = {
   "person" => {
     "name" => 123,
@@ -66,8 +64,8 @@ else
   puts errors.inspect
 end
 ```
-In the example above payload is invalid and as a result `valid` has value
-`false` and `errors` contain:
+In the example above the payload is invalid and as a result `valid` has value
+`false` and `errors` contains:
 ```
 {"person/name"=>["must be a string"], "person/age"=>["must be an integer"]}
 ```
@@ -78,7 +76,9 @@ the payload.
 
 When using this gem in your application code you would only include
 `ComposableValidations` module in classes responsible for validation.
+
 Extending previous example into Sinatra app:
+
 ```ruby
 require 'sinatra'
 require 'json'
@@ -120,9 +120,9 @@ end
 
 ### Arrays
 
-Previous examples were showing validation of JSON object. We can as well
+The previous examples showed validation of a JSON object. We can also
 validate JSON arrays. Let's add list of hobbies to our person object from
-previous examples:
+the previous examples:
 ```ruby
 {
   "person" => {
@@ -132,7 +132,7 @@ previous examples:
   }
 }
 ```
-We will also not accept people with less than two hobbies. Validator for this
+We will also not accept people with fewer than two hobbies. Validator for this
 payload:
 ```ruby
 a_hash(
