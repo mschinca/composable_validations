@@ -145,6 +145,16 @@ a_hash(
       min_size(2),
       each(non_empty_string))))))
 ```
+Try to apply this validator to the payload containing invalid list of hobbies
+```
+...
+"hobbies" => ["knitting", {"not" => "allowed"}, "horse riding"]
+...
+```
+and you'll get errors specifying exactly where the invalid element is:
+```
+{"person/hobbies/1"=>["must be a string"]}
+```
 
 ### Dependent validations
 
